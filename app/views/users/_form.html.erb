@@ -1,3 +1,12 @@
+<% unless @user.errors.empty? %>
+  <h1><%= pluralize(@user.errors.count, 'Error') %> stopped this form from being submitted</h1>
+  <% @user.errors.full_messages.each do |message| %>
+  <ul>
+    <li><%= message %></li>
+  </ul>
+  <% end %>
+<% end %>
+
 <%= form_with model: user do |form| %>
   <%= form.label :username%>
   <%= form.text_field :username, placeholder: 'Your Username Here' %> <br>
