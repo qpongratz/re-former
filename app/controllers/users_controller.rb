@@ -17,12 +17,26 @@ class UsersController < ApplicationController
     @user = User.new(whitelisted_user_params)
 
     if @user.save
-      redirect_to new_user_path
+      redirect_to @user
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(whitelisted_user_params)
+      redirect_to user_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+  
   private
 
   def whitelisted_user_params
